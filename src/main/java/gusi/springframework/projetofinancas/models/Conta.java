@@ -3,22 +3,30 @@ package gusi.springframework.projetofinancas.models;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
-public class Contas {
+public class Conta {
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id; 
 	private String nome;
 	private Double valor;
+	@JsonFormat(pattern = "dd/MM/yyyy") 
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate data;	
-	private String tipo;
-	@ManyToOne
-	private Usuario usuario;
+	@Enumerated(EnumType.STRING)
+	private  Categoria categorias ;	
+	private Long usuarioId;
 
 
 	public Long getId() {
@@ -35,16 +43,16 @@ public class Contas {
 
 	public LocalDate getData() {
 		return data;
+	}	
+	
+	
+	public Categoria getCategorias() {
+		return categorias;
 	}
 
-	public String getTipo() {
-		return tipo;
-	}
-	
-	public Usuario getUsuario() { 
-		return usuario;
-	}
-	
+	public Long getUsuarioId() {
+		return usuarioId;
+	}	
 	
 	
 	

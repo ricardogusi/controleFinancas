@@ -18,8 +18,9 @@ public class Usuario {
 	private String email;
 	private String senha;
 	
-	@OneToMany(mappedBy = "usuario")
-	private List<Contas> contas = new ArrayList<>();
+	@OneToMany(mappedBy = "usuarioId")
+	private List<Conta> contas = new ArrayList<>();
+
 	
 	
 	public Long getId() {
@@ -42,14 +43,15 @@ public class Usuario {
 	}
 
 
-	public List<Contas> getContas() {
+	public List<Conta> getContas() {
 		return contas;
 	}
 
 
-	public void setContas(List<Contas> contas) {
-		this.contas = contas;
-	}	
+	public void setContas(Conta conta) {
+		contas.add(conta);
+	}
+	
 	
 	
 }
