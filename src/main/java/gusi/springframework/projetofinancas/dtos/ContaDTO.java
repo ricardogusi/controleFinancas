@@ -17,6 +17,23 @@ public class ContaDTO {
 	private Categoria categoria;	
 	
 	
+	public ContaDTO() { 
+		
+	}
+	
+	
+	
+	public ContaDTO(Long id, String nome, Double valor, LocalDate data, Categoria categoria) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.valor = valor;
+		this.data = data;
+		this.categoria = categoria;
+	}
+
+
+
 	public ContaDTO(Conta conta) { 
 		this.id = conta.getId();
 		this.nome = conta.getNome();
@@ -51,6 +68,7 @@ public class ContaDTO {
 		return contas.stream().map(ContaDTO::new).collect(Collectors.toList()	);
 	}
 	
+
 		
 		
 }
