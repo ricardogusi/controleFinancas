@@ -55,13 +55,26 @@ public class ContasController {
 		}
 	}
 
-	@GetMapping("/categorias/{id}/{ano}")
+	@GetMapping("/categorias/{id}/{ano}")		//id do usuário
 	public ResponseEntity<SomaCategoria> listarContasCategoria(@PathVariable Long id, @PathVariable String ano) {
 
 		if (id == null | ano == null) {
 			return ResponseEntity.notFound().build();
 		} else {
 			Optional<SomaCategoria> contas = contasRepository.somarCategorias(id, ano);
+			return ResponseEntity.ok(contas.get());
+		}
+
+	}
+	
+	@GetMapping("/categoria/{id}/{nome}/{mes}/{ano}")
+	public ResponseEntity<SomaCategoria> listarContasCategoria(@PathVariable Long id, 
+			@PathVariable String nome, @PathVariable String mes, @PathVariable String ano) {
+
+		if (nome == null | mes == null) {
+			return ResponseEntity.notFound().build();
+		} else {
+			Optional<SomaCategoria> contas = contasRepository.somarCategoriaNomeMes(id,nome, mes,ano);
 			return ResponseEntity.ok(contas.get());
 		}
 
