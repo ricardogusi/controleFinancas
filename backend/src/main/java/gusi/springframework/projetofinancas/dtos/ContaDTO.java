@@ -15,6 +15,7 @@ public class ContaDTO {
 	private Double valor;
 	private LocalDate data;	
 	private Categoria categoria;	
+	private Long usuarioId;
 	
 	
 	public ContaDTO() { 
@@ -23,13 +24,14 @@ public class ContaDTO {
 	
 	
 	
-	public ContaDTO(Long id, String nome, Double valor, LocalDate data, Categoria categoria) {
+	public ContaDTO(Long id, String nome, Double valor, LocalDate data, Categoria categoria, Long usuarioId) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.valor = valor;
 		this.data = data;
 		this.categoria = categoria;
+		this.usuarioId= usuarioId;
 	}
 
 
@@ -62,8 +64,14 @@ public class ContaDTO {
 	public Categoria getCategoria() {
 		return categoria;
 	}
-
 	
+		
+	public Long getUsuarioId() {
+		return usuarioId;
+	}
+
+
+
 	public static List<ContaDTO> converter(List<Conta> contas) {
 		return contas.stream().map(ContaDTO::new).collect(Collectors.toList()	);
 	}

@@ -30,7 +30,7 @@ public class ContasController {
 	@Autowired
 	private ContasRepository contasRepository;
 
-	@PostMapping
+	@PostMapping("/{id}")
 	@Transactional
 	public ResponseEntity<ContaDTO> cadastrarConta(@RequestBody @Valid Conta conta) {
 
@@ -39,17 +39,17 @@ public class ContasController {
 		} else {
 			contasRepository.save(conta);
 			return ResponseEntity.ok(new ContaDTO(conta.getId(), conta.getNome(), conta.getValor(),
-					conta.getData(), conta.getCategorias()));
+					conta.getData(), conta.getCategorias(), conta.getUsuarioId()));
 		}
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<List<ContaDTO>> listarContas(@PathVariable Long id) {
 
-		if (contasRepository.findByUsuarioId(id).isEmpty()) {
+		if (contasRepository.findByUsuarioIdOrderByDataDesc(id).isEmpty()) {
 			return ResponseEntity.notFound().build();
 		} else {
-			List<Conta> contas = contasRepository.findByUsuarioId(id);
+			List<Conta> contas = contasRepository.findByUsuarioIdOrderByDataDesc(id);
 			List<ContaDTO> result = ContaDTO.converter(contas);
 			return ResponseEntity.ok().body(result);
 		}

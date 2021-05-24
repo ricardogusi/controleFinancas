@@ -1,0 +1,37 @@
+.box { 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+    width: 1000px;
+    height: 600px;      
+    margin: 15px auto;    
+}
+
+input { 
+    margin-bottom: 10px;
+}
+
+select { 
+    border: none;
+    border-radius: 5px;    
+    height: 30px;
+    width: 280px;
+    margin-bottom: 15px;    
+}
+
+.buttonSave { 
+    background-color:#003d72 ;
+    color: white;
+    width: 100px;
+    height: 30px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+}
+
+
+.buttonSave:active {
+  background-color: #0e5899;  
+  transition: 0.3s;
+}

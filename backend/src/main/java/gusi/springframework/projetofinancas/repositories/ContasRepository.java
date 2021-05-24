@@ -14,7 +14,7 @@ import gusi.springframework.projetofinancas.orm.TotalMensal;
 public interface ContasRepository extends JpaRepository<Conta, Long>{
 
 	
-	List<Conta> findByUsuarioId(Long id);
+	List<Conta> findByUsuarioIdOrderByDataDesc(Long id);
 
 	@Query(value = "SELECT  c.categorias, sum(c.valor) VALOR FROM conta c WHERE c.usuario_id = :id "
 			+ "and YEAR(data) = :ano GROUP BY c.categorias", nativeQuery = true)
