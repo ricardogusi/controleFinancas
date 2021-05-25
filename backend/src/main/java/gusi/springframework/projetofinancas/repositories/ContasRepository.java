@@ -18,7 +18,7 @@ public interface ContasRepository extends JpaRepository<Conta, Long>{
 
 	@Query(value = "SELECT  c.categorias, sum(c.valor) VALOR FROM conta c WHERE c.usuario_id = :id "
 			+ "and YEAR(data) = :ano GROUP BY c.categorias", nativeQuery = true)
-	Optional<SomaCategoria> somarCategorias(Long id, String ano);	
+	List<SomaCategoria> somarCategorias(Long id, String ano);	
 	
 	@Query(value = "SELECT  c.categorias, sum(c.valor) VALOR FROM conta c WHERE c.usuario_id = :id "
 			+ "and MONTH(data) = :mes and YEAR(data) = :ano and c.categorias LIKE  :nome  GROUP BY c.categorias", nativeQuery = true)

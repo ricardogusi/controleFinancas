@@ -1,18 +1,29 @@
+
+.containnerplus {
+    margin-left: 150px;
+}
+
 .containnerContas { 
+    
     margin-top: 50px;   
     width: 100%;
     height: 90vh;    
     text-align: center;    
     font-size: 1.5rem;    
     overflow: auto;
+    
 }
+
+
+
 
 ul {    
     display: grid;
-    grid-template-columns: repeat(4, 1fr);           
+    grid-template-columns: 1fr 1fr 1fr 1fr 50px;           
     justify-content: space-between;
     list-style-type: none;
     margin-right: 15px;
+    
 }
 
 .ulTitulo { 
@@ -35,6 +46,17 @@ ul {
     height: 50px;    
     color: white;
 }
+
+.deleteImg {     
+    width: 30px;
+    height: 30px;
+    cursor: pointer;           
+}
+
+.deleteImg:hover { 
+    opacity: 0.5;    
+}
+
 
 
 ::-webkit-scrollbar-track {

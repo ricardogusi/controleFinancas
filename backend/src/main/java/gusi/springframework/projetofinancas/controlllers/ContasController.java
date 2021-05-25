@@ -56,13 +56,14 @@ public class ContasController {
 	}
 
 	@GetMapping("/categorias/{id}/{ano}")		//id do usuário
-	public ResponseEntity<SomaCategoria> listarContasCategoria(@PathVariable Long id, @PathVariable String ano) {
+	public ResponseEntity<List<SomaCategoria>> listarContasCategoria(@PathVariable Long id, @PathVariable String ano) {
 
 		if (id == null | ano == null) {
 			return ResponseEntity.notFound().build();
 		} else {
-			Optional<SomaCategoria> contas = contasRepository.somarCategorias(id, ano);
-			return ResponseEntity.ok(contas.get());
+			List<SomaCategoria> contas = contasRepository.somarCategorias(id, ano);
+			
+			return ResponseEntity.ok(contas);
 		}
 
 	}

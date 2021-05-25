@@ -37,8 +37,7 @@ export default function Cadastrar() {
     event.preventDefault();
     axios
       .post("http://localhost:8081/api/contas/1", conta)
-      .then(alert("Conta cadastrada com sucesso!"));
-    
+      .then(alert("Conta cadastrada com sucesso!"));    
 
      
   }
