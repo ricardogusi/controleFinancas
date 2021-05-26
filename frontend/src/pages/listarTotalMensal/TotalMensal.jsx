@@ -9,15 +9,11 @@ export default function TotalMensal() {
   const [ano, setAno] = useState("");
   const [status, setStatus] = useState(true);
 
-  
   function buscar() {
-    
     axios
       .get(`http://localhost:8081/api/contas/totalmensal/1/${mes}/${ano}`)
       .then((r) => setContas(r.data));
-
     setStatus(false);
-   
   }
 
   function handleMes(event) {
@@ -33,6 +29,8 @@ export default function TotalMensal() {
     document.getElementById("selectAno").value = "Ano";
     document.getElementById("selectMes").value = "Mês";
   }
+
+  
 
   return (
     <Dashboard>
@@ -74,11 +72,13 @@ export default function TotalMensal() {
             </li>
           </ul>
 
+        
           {contas.map((conta, i) => (
-            <ul key={i} className="ulConteudo">              
+            <ul key={i} className="ulConteudo">
               <li>R$ {conta.valor}</li>
             </ul>
           ))}
+
 
           <button className="buttonSave" onClick={handleVoltar}>
             Voltar
