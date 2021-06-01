@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import gusi.springframework.projetofinancas.dtos.ContaDTO;
 import gusi.springframework.projetofinancas.models.Conta;
-import gusi.springframework.projetofinancas.models.Pagador;
 import gusi.springframework.projetofinancas.orm.SomaCategoria;
 import gusi.springframework.projetofinancas.orm.TotalMensal;
 import gusi.springframework.projetofinancas.repositories.ContasRepository;
