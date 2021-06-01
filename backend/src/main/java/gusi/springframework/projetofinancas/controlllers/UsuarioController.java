@@ -21,24 +21,22 @@ public class UsuarioController {
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-	
 
-	
 	@GetMapping
-	public List<UsuarioDTO>listarUsuarios () { 		
+	public List<UsuarioDTO> listarUsuarios() {
 		List<Usuario> usuarios = usuarioRepository.findAll();
 		return UsuarioDTO.converter(usuarios);
 	}
-	
+
 	@GetMapping("/{id}")
-	public List<UsuarioDTO>listarUsuarioId(@PathVariable Long id) {
+	public List<UsuarioDTO> listarUsuarioId(@PathVariable Long id) {
 		Optional<Usuario> usuarioId = usuarioRepository.findById(id);
 		return UsuarioDTO.converter(usuarioId);
 	}
-	
+
 	@PostMapping
 	public void cadastrarUsuario(@RequestBody Usuario usuario) {
 		usuarioRepository.save(usuario);
 	}
-	
+
 }

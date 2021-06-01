@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import gusi.springframework.projetofinancas.dtos.ContaDTO;
 import gusi.springframework.projetofinancas.models.Conta;
+import gusi.springframework.projetofinancas.models.Pagador;
 import gusi.springframework.projetofinancas.orm.SomaCategoria;
 import gusi.springframework.projetofinancas.orm.TotalMensal;
 import gusi.springframework.projetofinancas.repositories.ContasRepository;
@@ -29,6 +30,7 @@ public class ContasController {
 
 	@Autowired
 	private ContasRepository contasRepository;
+		
 
 	@PostMapping("/{id}")
 	@Transactional
@@ -39,29 +41,29 @@ public class ContasController {
 		} else {
 			contasRepository.save(conta);
 			return ResponseEntity.ok(new ContaDTO(conta.getId(), conta.getNome(), conta.getValor(),
-					conta.getData(), conta.getCategorias(), conta.getUsuarioId()));
+					conta.getData(), conta.getCategorias(), conta.getUsuario(), conta.getPagador()));
 		}
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<List<ContaDTO>> listarContas(@PathVariable Long id) {
 
-		if (contasRepository.findByUsuarioIdOrderByDataDesc(id).isEmpty()) {
+		if (contasRepository.findByUsuarioOrderByDataDesc(id).isEmpty()) {
 			return ResponseEntity.notFound().build();
 		} else {
-			List<Conta> contas = contasRepository.findByUsuarioIdOrderByDataDesc(id);
+			List<Conta> contas = contasRepository.findByUsuarioOrderByDataDesc(id);
 			List<ContaDTO> result = ContaDTO.converter(contas);
 			return ResponseEntity.ok().body(result);
 		}
 	}
 
-	@GetMapping("/categorias/{id}/{ano}")		//id do usuário
+	@GetMapping("/categorias/{id}/{ano}")	
 	public ResponseEntity<List<SomaCategoria>> listarContasCategoria(@PathVariable Long id, @PathVariable String ano) {
 
 		if (id == null | ano == null) {
 			return ResponseEntity.notFound().build();
 		} else {
-			List<SomaCategoria> contas = contasRepository.somarCategorias(id, ano);
+			List<SomaCategoria> contas = contasRepository.listarContasCategoria(id, ano);
 			
 			return ResponseEntity.ok(contas);
 		}
