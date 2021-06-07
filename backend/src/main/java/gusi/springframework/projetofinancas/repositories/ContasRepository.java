@@ -31,4 +31,7 @@ public interface ContasRepository extends JpaRepository<Conta, Long>{
 	@Query(value = "SELECT SUM(c.valor) VALOR FROM conta c WHERE c.usuario = :id "
 			+ "and MONTH(data) = :mes and YEAR(data) = :ano", nativeQuery = true)
 	List<TotalMensal> listarTotalMensal(Long id, String mes, String ano);
+	
+	@Query(value = "")
+	List<?> contasPagadores(Long id, String mes, String ano);
 }

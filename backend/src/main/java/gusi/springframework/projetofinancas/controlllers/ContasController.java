@@ -31,6 +31,7 @@ public class ContasController {
 	private ContasRepository contasRepository;
 		
 
+	//CADASTRAR CONTAS
 	@PostMapping("/{id}")
 	@Transactional
 	public ResponseEntity<ContaDTO> cadastrarConta(@RequestBody @Valid Conta conta) {
@@ -44,6 +45,7 @@ public class ContasController {
 		}
 	}
 
+	//LISTAR CONTAS DO USUÁRIO
 	@GetMapping("/{id}")
 	public ResponseEntity<List<ContaDTO>> listarContas(@PathVariable Long id) {
 
@@ -56,6 +58,7 @@ public class ContasController {
 		}
 	}
 
+	//LISTAR CONTAS DA CATEGORIA POR ANO
 	@GetMapping("/categorias/{id}/{ano}")	
 	public ResponseEntity<List<SomaCategoria>> listarContasCategoria(@PathVariable Long id, @PathVariable String ano) {
 
@@ -69,6 +72,7 @@ public class ContasController {
 
 	}
 	
+	//LISTAR CONTAS DA CATEGORIA POR NOME/MES/ANO
 	@GetMapping("/categoria/{id}/{nome}/{mes}/{ano}")
 	public ResponseEntity<SomaCategoria> listarContasCategoria(@PathVariable Long id, 
 			@PathVariable String nome, @PathVariable String mes, @PathVariable String ano) {
@@ -82,6 +86,7 @@ public class ContasController {
 
 	}
 
+	//LISTAR CONTAS POR MES/ANO
 	@GetMapping("/{id}/{mes}/{ano}")
 	public ResponseEntity<List<ContaDTO>> listarContas(@PathVariable Long id, @PathVariable String mes,
 			@PathVariable String ano) {
@@ -95,6 +100,7 @@ public class ContasController {
 		}
 	}
 
+	//LISTAR TOTAL MENSAL DAS CONTAS POR MES/ANO
 	@GetMapping("/totalmensal/{id}/{mes}/{ano}")
 	public ResponseEntity<List<TotalMensal>> listarTotalMensal(@PathVariable Long id, @PathVariable String mes,
 			@PathVariable String ano) {
@@ -105,7 +111,22 @@ public class ContasController {
 			return ResponseEntity.ok().body(contas);
 		}
 	}
+	
+	
+	//LISTAR CONTAS POR PAGADORES/MES/ANO
+	@GetMapping("/pagadores/{id}/{mes}/{ano}")
+	public ResponseEntity<List<?>> listarPagadoresMesAno(@PathVariable Long id, @PathVariable String mes, @PathVariable String ano ) {
+		if(id == null | mes == null | ano ==null) {
+			return ResponseEntity.notFound().build();
+		} else { 
+			List<?> contaPagadores = contasRepository.contasPagadores(id, mes, ano);
+			return ResponseEntity.ok().body(contaPagadores);
+		}
+	}
+	
+	
 
+	//DELETAR ALGUMA CONTA
 	@DeleteMapping("/{id}")
 	@Transactional
 	public ResponseEntity<?> deletarConta(@PathVariable Long id) {
