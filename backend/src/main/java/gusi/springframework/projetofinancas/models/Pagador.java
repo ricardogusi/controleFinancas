@@ -18,7 +18,7 @@ public class Pagador {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long Id;	
+	private Long id;	
 	@NotBlank
 	private String nome;		
 	@NotNull	
@@ -40,7 +40,7 @@ public class Pagador {
 	}
 
 	public Long getId() {
-		return Id;
+		return id;
 	}
 
 	public String getNome() {

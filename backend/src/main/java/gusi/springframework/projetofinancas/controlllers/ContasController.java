@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import gusi.springframework.projetofinancas.dtos.ContaDTO;
 import gusi.springframework.projetofinancas.models.Conta;
 import gusi.springframework.projetofinancas.orm.SomaCategoria;
+import gusi.springframework.projetofinancas.orm.SomaPagadores;
 import gusi.springframework.projetofinancas.orm.TotalMensal;
 import gusi.springframework.projetofinancas.repositories.ContasRepository;
 
@@ -115,11 +116,11 @@ public class ContasController {
 	
 	//LISTAR CONTAS POR PAGADORES/MES/ANO
 	@GetMapping("/pagadores/{id}/{mes}/{ano}")
-	public ResponseEntity<List<?>> listarPagadoresMesAno(@PathVariable Long id, @PathVariable String mes, @PathVariable String ano ) {
+	public ResponseEntity<List<SomaPagadores>> listarPagadoresMesAno(@PathVariable Long id, @PathVariable String mes, @PathVariable String ano ) {
 		if(id == null | mes == null | ano ==null) {
 			return ResponseEntity.notFound().build();
 		} else { 
-			List<?> contaPagadores = contasRepository.contasPagadores(id, mes, ano);
+			List<SomaPagadores> contaPagadores = contasRepository.contasPagadores(id, mes, ano);
 			return ResponseEntity.ok().body(contaPagadores);
 		}
 	}

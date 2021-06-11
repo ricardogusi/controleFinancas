@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import gusi.springframework.projetofinancas.models.Conta;
 import gusi.springframework.projetofinancas.orm.SomaCategoria;
+import gusi.springframework.projetofinancas.orm.SomaPagadores;
 import gusi.springframework.projetofinancas.orm.TotalMensal;
 
 
@@ -32,6 +33,10 @@ public interface ContasRepository extends JpaRepository<Conta, Long>{
 			+ "and MONTH(data) = :mes and YEAR(data) = :ano", nativeQuery = true)
 	List<TotalMensal> listarTotalMensal(Long id, String mes, String ano);
 	
-	@Query(value = "")
-	List<?> contasPagadores(Long id, String mes, String ano);
+	@Query(value = "SELECT p.nome, SUM(c.valor) as valor FROM conta c "
+			+ "INNER JOIN pagador p ON p.usuario = c.usuario "
+			+ "AND p.id = c.pagador "
+			+ "WHERE c.usuario = :id AND MONTH(data) = :mes AND YEAR(data) = :ano "
+			+ "GROUP BY pagador", nativeQuery = true)
+	List<SomaPagadores> contasPagadores(Long id, String mes, String ano);
 }
